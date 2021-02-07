@@ -65,8 +65,6 @@ public class Animal implements Serializable {
 		this.status = status;
 	}
 
-	
-
 	public Long getId() {
 		return id;
 	}

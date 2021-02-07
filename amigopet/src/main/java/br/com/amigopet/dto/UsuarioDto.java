@@ -2,7 +2,6 @@ package br.com.amigopet.dto;
 
 import java.util.Optional;
 
-
 import br.com.amigopet.model.Usuario;
 
 public class UsuarioDto {
@@ -11,8 +10,8 @@ public class UsuarioDto {
 	private String nome;
 	private String email;
 	private String celular;
-	
-	public UsuarioDto(Long id, String nome,String email, String celular) {
+
+	public UsuarioDto(Long id, String nome, String email, String celular) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -36,9 +35,9 @@ public class UsuarioDto {
 	}
 
 	public static UsuarioDto converter(Optional<Usuario> usuario) {
-		UsuarioDto usuarioDto = new UsuarioDto(usuario.get().getId(),usuario.get().getNome(), usuario.get().getEmail(), usuario.get().getCelular());
+		UsuarioDto usuarioDto = new UsuarioDto(usuario.get().getId(), usuario.get().getNome(), usuario.get().getEmail(),
+				usuario.get().getCelular());
 		return usuarioDto;
 	}
-	
-	
+
 }

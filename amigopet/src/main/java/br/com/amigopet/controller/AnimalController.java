@@ -39,6 +39,7 @@ public class AnimalController {
 	}
 
 	@GetMapping("/visualizar/{id}")
+	@Transactional
 	public AnimalDto visualizar(@PathVariable Long id) {
 		Animal animal = animalRepository.getOne(id);
 		return new AnimalDto(animal);

@@ -7,20 +7,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
-
-
 @Entity
-public class Administrador implements  Serializable {
+public class Administrador implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String email;
 	private String senha;
-	
-	
-	public Administrador() {}
+
+	public Administrador() {
+	}
 
 	public Long getId() {
 		return id;
@@ -45,14 +43,5 @@ public class Administrador implements  Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

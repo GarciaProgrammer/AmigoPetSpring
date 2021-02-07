@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.amigopet.model.DadosBancarios;
 
-public interface DadosBancariosRepository extends JpaRepository<DadosBancarios, Long>{
+public interface DadosBancariosRepository extends JpaRepository<DadosBancarios, Long> {
 
 }

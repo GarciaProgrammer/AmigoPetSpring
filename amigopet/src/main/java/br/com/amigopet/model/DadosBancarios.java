@@ -11,8 +11,9 @@ import javax.persistence.ManyToOne;
 @Entity
 public class DadosBancarios implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nomeBanco;
 	private String agencia;
@@ -20,9 +21,10 @@ public class DadosBancarios implements Serializable {
 	private String chavePix;
 	@ManyToOne
 	private Usuario usuario;
-	
-	public DadosBancarios() {}
-	
+
+	public DadosBancarios() {
+	}
+
 	public DadosBancarios(String nomeBanco, String agencia, String conta, String chavePix, Usuario usuario) {
 		super();
 		this.nomeBanco = nomeBanco;
@@ -31,7 +33,7 @@ public class DadosBancarios implements Serializable {
 		this.chavePix = chavePix;
 		this.usuario = usuario;
 	}
-	
+
 	public DadosBancarios(Long id, String nomeBanco, String agencia, String conta, String chavePix) {
 		super();
 		this.id = id;
@@ -39,11 +41,10 @@ public class DadosBancarios implements Serializable {
 		this.agencia = agencia;
 		this.conta = conta;
 		this.chavePix = chavePix;
-	
+
 	}
 
-	public DadosBancarios(Long id, String nomeBanco, String agencia, String conta, String chavePix,
-			Usuario usuario) {
+	public DadosBancarios(Long id, String nomeBanco, String agencia, String conta, String chavePix, Usuario usuario) {
 		super();
 		this.id = id;
 		this.nomeBanco = nomeBanco;
@@ -56,30 +57,39 @@ public class DadosBancarios implements Serializable {
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getNomeBanco() {
 		return nomeBanco;
 	}
+
 	public void setNomeBanco(String nomeBanco) {
 		this.nomeBanco = nomeBanco;
 	}
+
 	public String getAgencia() {
 		return agencia;
 	}
+
 	public void setAgencia(String agencia) {
 		this.agencia = agencia;
 	}
+
 	public String getConta() {
 		return conta;
 	}
+
 	public void setConta(String conta) {
 		this.conta = conta;
 	}
+
 	public String getChavePix() {
 		return chavePix;
 	}
+
 	public void setChavePix(String chavePix) {
 		this.chavePix = chavePix;
 	}
@@ -91,10 +101,5 @@ public class DadosBancarios implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
-	
-	
-	
-	
 
 }
