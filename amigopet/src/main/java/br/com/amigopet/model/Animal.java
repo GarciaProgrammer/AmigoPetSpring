@@ -26,13 +26,14 @@ public class Animal implements Serializable {
 	private Usuario usuario;
 	private String cidade;
 	private String estado;
+	private String status;
 
 	public Animal() {
 		super();
 	}
 
 	public Animal(String nome, String tipo, String raca, int idade, String sexo, String descricao, Byte imagem,
-			Usuario usuario, String cidade, String estado) {
+			Usuario usuario, String cidade, String estado, String status) {
 		super();
 		this.nome = nome;
 		this.tipo = tipo;
@@ -44,10 +45,11 @@ public class Animal implements Serializable {
 		this.usuario = usuario;
 		this.cidade = cidade;
 		this.estado = estado;
+		this.status = status;
 	}
 
 	public Animal(Long id, String nome, String tipo, String raca, int idade, String sexo, String descricao, Byte imagem,
-			Usuario usuario, String cidade, String estado) {
+			Usuario usuario, String cidade, String estado, String status) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -60,9 +62,8 @@ public class Animal implements Serializable {
 		this.usuario = usuario;
 		this.cidade = cidade;
 		this.estado = estado;
+		this.status = status;
 	}
-
-	
 
 	public Long getId() {
 		return id;
@@ -128,14 +129,6 @@ public class Animal implements Serializable {
 		this.imagem = imagem;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
 	public String getCidade() {
 		return cidade;
 	}
@@ -150,6 +143,22 @@ public class Animal implements Serializable {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

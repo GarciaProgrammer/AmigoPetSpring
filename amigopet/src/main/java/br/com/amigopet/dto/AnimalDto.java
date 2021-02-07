@@ -15,7 +15,7 @@ public class AnimalDto {
 	private String sexo;
 	private String descricao;
 	private Byte imagem;
-	private Long id_usuario;
+	private Long usuario;
 	private String cidade;
 	private String estado;
 
@@ -28,7 +28,7 @@ public class AnimalDto {
 		this.sexo = animal.getSexo();
 		this.descricao = animal.getDescricao();
 		this.imagem = animal.getImagem();
-		this.id_usuario = animal.getUsuario().getId();
+		this.usuario = animal.getUsuario().getId();
 		this.cidade = animal.getCidade();
 		this.estado = animal.getEstado();
 
@@ -66,8 +66,8 @@ public class AnimalDto {
 		return imagem;
 	}
 
-	public Long getId_usuario() {
-		return id_usuario;
+	public Long usuario() {
+		return usuario;
 	}
 
 	public String getCidade() {
