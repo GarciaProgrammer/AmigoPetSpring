@@ -1,12 +1,8 @@
 package br.com.amigopet.dto;
 
-
-
 import java.util.Optional;
 
-
 import br.com.amigopet.model.DadosBancarios;
-
 
 public class DadosBancariosDto {
 	private Long id;
@@ -22,50 +18,32 @@ public class DadosBancariosDto {
 		this.conta = conta;
 		this.chavePix = chavePix;
 	}
-	
-	
 
 	public Long getId() {
 		return id;
 	}
 
-
-
 	public String getNomeBanco() {
 		return nomeBanco;
 	}
-
-
 
 	public String getAgencia() {
 		return agencia;
 	}
 
-
-
 	public String getConta() {
 		return conta;
 	}
-
-
 
 	public String getChavePix() {
 		return chavePix;
 	}
 
-
-
 	public static DadosBancariosDto converter(Optional<DadosBancarios> dadosBancarios) {
-		DadosBancariosDto dadosBancariosDto = new DadosBancariosDto(dadosBancarios.get().getId() ,dadosBancarios.get().getNomeBanco() ,
-				dadosBancarios.get().getAgencia(), dadosBancarios.get().getConta(), dadosBancarios.get().getChavePix());
+		DadosBancariosDto dadosBancariosDto = new DadosBancariosDto(dadosBancarios.get().getId(),
+				dadosBancarios.get().getNomeBanco(), dadosBancarios.get().getAgencia(), dadosBancarios.get().getConta(),
+				dadosBancarios.get().getChavePix());
 		return dadosBancariosDto;
 	}
-
-
-
-	
-	
-
-
 
 }
