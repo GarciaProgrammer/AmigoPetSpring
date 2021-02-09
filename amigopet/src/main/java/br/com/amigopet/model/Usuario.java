@@ -25,15 +25,13 @@ public class Usuario implements Serializable {
 	private List<Animal> animais = new ArrayList<>();
 	@OneToMany(mappedBy = "usuario")
 	private List<DadosBancarios> dadosBancarios = new ArrayList<>();
-	private String cidade;
-	private String estado;
 
 	public Usuario() {
 		super();
 	}
 
 	public Usuario(String nome, String email, String senha, String celular, List<Animal> animais,
-			List<DadosBancarios> dadosBancarios, String cidade, String estado) {
+			List<DadosBancarios> dadosBancarios) {
 		super();
 		this.nome = nome;
 		this.email = email;
@@ -41,12 +39,11 @@ public class Usuario implements Serializable {
 		this.celular = celular;
 		this.animais = animais;
 		this.dadosBancarios = dadosBancarios;
-		this.cidade = cidade;
-		this.estado = estado;
+
 	}
 
 	public Usuario(Long id, String nome, String email, String senha, String celular, List<Animal> animais,
-			List<DadosBancarios> dadosBancarios, String cidade, String estado) {
+			List<DadosBancarios> dadosBancarios) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -55,29 +52,26 @@ public class Usuario implements Serializable {
 		this.celular = celular;
 		this.animais = animais;
 		this.dadosBancarios = dadosBancarios;
-		this.cidade = cidade;
-		this.estado = estado;
+
 	}
 
-	public Usuario(String nome, String email, String senha, String celular, String cidade, String estado) {
+	public Usuario(String nome, String email, String senha, String celular) {
 		super();
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 		this.celular = celular;
-		this.cidade = cidade;
-		this.estado = estado;
+
 	}
 
-	public Usuario(Long id, String nome, String email, String senha, String celular, String cidade, String estado) {
+	public Usuario(Long id, String nome, String email, String senha, String celular) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 		this.celular = celular;
-		this.cidade = cidade;
-		this.estado = estado;
+
 	}
 
 	public Long getId() {
@@ -134,22 +128,6 @@ public class Usuario implements Serializable {
 
 	public void setDadosBancarios(List<DadosBancarios> dadosBancarios) {
 		this.dadosBancarios = dadosBancarios;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
 	}
 
 }

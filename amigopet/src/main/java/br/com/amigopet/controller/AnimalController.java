@@ -24,6 +24,7 @@ import br.com.amigopet.dto.AnimalDto;
 import br.com.amigopet.model.Animal;
 
 import br.com.amigopet.repository.AnimalRepository;
+import br.com.amigopet.server.DataAnimal;
 
 @CrossOrigin("*")
 @RestController
@@ -33,9 +34,11 @@ public class AnimalController {
 	@Autowired
 	AnimalRepository animalRepository;
 
+	@Autowired
+	DataAnimal dataServer;
+
 	@PostMapping("/cadastrar")
 	public Animal cadastrar(@RequestBody Animal animal) {
-	
 		return animalRepository.save(animal);
 
 	}
@@ -44,22 +47,14 @@ public class AnimalController {
 	public void cadastrar(@Valid @PathVariable("idAnimal") Long idAnimal,
 			@RequestPart(name = "imagem") MultipartFile imagem) throws Exception {
 
-		Animal animal = animalRepository.findById(idAnimal).orElseThrow(() -> new Exception("Animal não encontrado"));
-		String nome = imagem.getOriginalFilename().substring(0, imagem.getOriginalFilename().length() - 4);
-		String ext = imagem.getOriginalFilename().substring(imagem.getOriginalFilename().length() - 4,
-				imagem.getOriginalFilename().length());
-		String imgNameSave = nome + '_' + System.currentTimeMillis() + ext;
-		animal.setImagem(imgNameSave);
-		
-		animalRepository.save(animal);
-		
-		
-		System.out.println(imagem.getOriginalFilename());
-		System.out.println(animal.getImagem());//hash
-		System.out.println(animal.getNome());
-	}
+		Animal animal = criaHashImagem(idAnimal, imagem);
 
-	
+		// Salva imagem do animal no servidor
+		dataServer.criaDiretorio(imagem, animal);
+
+		animalRepository.save(animal);
+
+	}
 
 	@GetMapping("/visualizar/{id}")
 	@Transactional
@@ -87,6 +82,17 @@ public class AnimalController {
 	public List<AnimalDto> lista() {
 		List<Animal> animais = animalRepository.findAll();
 		return AnimalDto.converterLista(animais);
+	}
+
+	private Animal criaHashImagem(@Valid Long idAnimal, MultipartFile imagem) throws Exception {
+		Animal animal = animalRepository.findById(idAnimal).orElseThrow(() -> new Exception("Animal não encontrado"));
+		String nome = imagem.getOriginalFilename().substring(0, imagem.getOriginalFilename().length() - 4);
+		String ext = imagem.getOriginalFilename().substring(imagem.getOriginalFilename().length() - 4,
+				imagem.getOriginalFilename().length());
+		String imgHashSave = nome + '_' + System.currentTimeMillis() + ext;
+
+		animal.setImagem(imgHashSave);
+		return animal;
 	}
 
 }

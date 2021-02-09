@@ -15,13 +15,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.amigopet.controller.form.AtualizacaoDicaForm;
 import br.com.amigopet.dto.DicaDto;
+
 import br.com.amigopet.model.Dica;
 
 import br.com.amigopet.repository.DicaRepository;
+
+import br.com.amigopet.server.DataDica;
 
 @CrossOrigin("*")
 @RestController
@@ -31,9 +36,25 @@ public class DicaController {
 	@Autowired
 	DicaRepository dicaRepository;
 
+	@Autowired
+	DataDica dataServer;
+
 	@PostMapping("/cadastrar")
 	public Dica cadastrar(@RequestBody Dica dica) {
 		return dicaRepository.save(dica);
+	}
+
+	@PostMapping("/cadastrarfoto/{idDica}")
+	public void cadastrar(@Valid @PathVariable("idDica") Long idDica,
+			@RequestPart(name = "imagem") MultipartFile imagem) throws Exception {
+
+		Dica dica = criaHashImagem(idDica, imagem);
+
+		// Salva imagem do animal no servidor
+		dataServer.criaDiretorio(imagem, dica);
+
+		dicaRepository.save(dica);
+
 	}
 
 	@GetMapping("/visualizar/{id}")
@@ -61,5 +82,17 @@ public class DicaController {
 	public List<DicaDto> lista() {
 		List<Dica> dicas = dicaRepository.findAll();
 		return DicaDto.converterLista(dicas);
+	}
+
+	private Dica criaHashImagem(@Valid Long idDica, MultipartFile imagem) throws Exception {
+		Dica dica = dicaRepository.findById(idDica).orElseThrow(() -> new Exception("Dica não encontrada"));
+		String nome = imagem.getOriginalFilename().substring(0, imagem.getOriginalFilename().length() - 4);
+		String ext = imagem.getOriginalFilename().substring(imagem.getOriginalFilename().length() - 4,
+				imagem.getOriginalFilename().length());
+		String imgHashSave = nome + '_' + System.currentTimeMillis() + ext;
+
+		dica.setImagem(imgHashSave);
+
+		return dica;
 	}
 }
