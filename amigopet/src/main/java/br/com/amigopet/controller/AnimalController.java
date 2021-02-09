@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.amigopet.controller.form.AtualizacaoAnimalForm;
 import br.com.amigopet.dto.AnimalDto;
@@ -34,9 +35,31 @@ public class AnimalController {
 
 	@PostMapping("/cadastrar")
 	public Animal cadastrar(@RequestBody Animal animal) {
+	
 		return animalRepository.save(animal);
 
 	}
+
+	@PostMapping("/cadastrarfoto/{idAnimal}")
+	public void cadastrar(@Valid @PathVariable("idAnimal") Long idAnimal,
+			@RequestPart(name = "imagem") MultipartFile imagem) throws Exception {
+
+		Animal animal = animalRepository.findById(idAnimal).orElseThrow(() -> new Exception("Animal não encontrado"));
+		String nome = imagem.getOriginalFilename().substring(0, imagem.getOriginalFilename().length() - 4);
+		String ext = imagem.getOriginalFilename().substring(imagem.getOriginalFilename().length() - 4,
+				imagem.getOriginalFilename().length());
+		String imgNameSave = nome + '_' + System.currentTimeMillis() + ext;
+		animal.setImagem(imgNameSave);
+		
+		animalRepository.save(animal);
+		
+		
+		System.out.println(imagem.getOriginalFilename());
+		System.out.println(animal.getImagem());//hash
+		System.out.println(animal.getNome());
+	}
+
+	
 
 	@GetMapping("/visualizar/{id}")
 	@Transactional
