@@ -1,9 +1,9 @@
 package br.com.amigopet.controller.form;
 
 import br.com.amigopet.model.Animal;
-import br.com.amigopet.repository.AnimalRepository;
+import br.com.amigopet.model.Usuario;
 
-public class AtualizacaoAnimalForm {
+public class AnimalForm {
 
 	private String nome;
 	private String tipo;
@@ -16,6 +16,7 @@ public class AtualizacaoAnimalForm {
 	private String estado;
 	private String status;
 	private String porte;
+	private Usuario usuario;
 
 	public String getNome() {
 		return nome;
@@ -89,6 +90,14 @@ public class AtualizacaoAnimalForm {
 		this.estado = estado;
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	public String getStatus() {
 		return status;
 	}
@@ -105,21 +114,8 @@ public class AtualizacaoAnimalForm {
 		this.porte = porte;
 	}
 
-	public Animal atualizar(Long id, AnimalRepository animalRepository) {
-		Animal animal = animalRepository.getOne(id);
-		animal.setNome(this.nome);
-		animal.setTipo(this.tipo);
-		animal.setRaca(this.raca);
-		animal.setIdade(this.idade);
-		animal.setSexo(this.sexo);
-		animal.setDescricao(this.descricao);
-		animal.setImagem(this.imagem);
-		animal.setCidade(this.cidade);
-		animal.setEstado(this.estado);
-		animal.setStatus(this.status);
-		animal.setPorte(this.porte);
-
-		return animal;
+	public Animal converter() {
+		return new Animal(nome, tipo, raca, idade, sexo, descricao, imagem, usuario, cidade, estado, status, porte);
 	}
 
 }

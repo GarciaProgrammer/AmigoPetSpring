@@ -7,7 +7,7 @@ public class AtualizacaoDicaForm {
 
 	private String titulo;
 	private String descricao;
-	private Byte imagem;
+	private String imagem;
 
 	public String getTitulo() {
 		return titulo;
@@ -25,11 +25,11 @@ public class AtualizacaoDicaForm {
 		this.descricao = descricao;
 	}
 
-	public Byte getImagem() {
+	public String getImagem() {
 		return imagem;
 	}
 
-	public void setImagem(Byte imagem) {
+	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
 

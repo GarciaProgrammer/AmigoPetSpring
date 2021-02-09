@@ -9,7 +9,7 @@ public class DicaDto {
 	private Long id;
 	private String titulo;
 	private String descricao;
-	private Byte imagem;
+	private String imagem;
 
 	public DicaDto(Dica dica) {
 		this.id = dica.getId();
@@ -30,7 +30,7 @@ public class DicaDto {
 		return descricao;
 	}
 
-	public Byte getImagem() {
+	public String getImagem() {
 		return imagem;
 	}
 
