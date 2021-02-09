@@ -11,7 +11,7 @@ public class AtualizacaoAnimalForm {
 	private int idade;
 	private String sexo;
 	private String descricao;
-	private Byte imagem;
+	private String imagem;
 	private String cidade;
 	private String estado;
 	private String status;
@@ -64,11 +64,11 @@ public class AtualizacaoAnimalForm {
 		this.descricao = descricao;
 	}
 
-	public Byte getImagem() {
+	public String getImagem() {
 		return imagem;
 	}
 
-	public void setImagem(Byte imagem) {
+	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
 

@@ -14,7 +14,7 @@ public class AnimalDto {
 	private int idade;
 	private String sexo;
 	private String descricao;
-	private Byte imagem;
+	private String imagem;
 	private Long usuario;
 	private String cidade;
 	private String estado;
@@ -64,7 +64,7 @@ public class AnimalDto {
 		return descricao;
 	}
 
-	public Byte getImagem() {
+	public String getImagem() {
 		return imagem;
 	}
 
