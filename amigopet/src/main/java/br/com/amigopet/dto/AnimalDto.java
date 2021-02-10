@@ -19,6 +19,7 @@ public class AnimalDto {
 	private String cidade;
 	private String estado;
 	private String status;
+	private String porte;
 
 	public AnimalDto(Animal animal) {
 		this.id = animal.getId();
@@ -33,6 +34,7 @@ public class AnimalDto {
 		this.cidade = animal.getCidade();
 		this.estado = animal.getEstado();
 		this.status = animal.getStatus();
+		this.porte = animal.getPorte();
 
 	}
 
@@ -82,6 +84,10 @@ public class AnimalDto {
 
 	public String getStatus() {
 		return status;
+	}
+
+	public String getPorte() {
+		return porte;
 	}
 
 	public static List<AnimalDto> converterLista(List<Animal> animais) {

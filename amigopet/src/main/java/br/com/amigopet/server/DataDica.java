@@ -16,14 +16,12 @@ public class DataDica {
 	public void criaDiretorio(MultipartFile imagem, Dica dica) throws IOException {
 		String pasta = "imagens\\imagensDicas\\";
 		
-		
-
 		byte[] bytes = imagem.getBytes();
 
 		Path path = Paths.get(pasta + dica.getImagem());
 
-		System.out.print(dica.getImagem());
 		Files.write(path, bytes);
+		
 
 	}
 

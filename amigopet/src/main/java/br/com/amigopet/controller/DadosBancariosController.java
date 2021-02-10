@@ -1,20 +1,29 @@
 package br.com.amigopet.controller;
 
-import java.util.Optional;
+import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.amigopet.controller.form.AtualizacaoDadosBancariosForm;
+
 import br.com.amigopet.dto.DadosBancariosDto;
+
 import br.com.amigopet.model.DadosBancarios;
-import br.com.amigopet.model.Usuario;
+
 import br.com.amigopet.repository.DadosBancariosRepository;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/dadosbancarios")
 public class DadosBancariosController {
@@ -22,39 +31,31 @@ public class DadosBancariosController {
 	@Autowired
 	DadosBancariosRepository dadosBancariosRepository;
 
-	@RequestMapping("/cadastra")
-	@PostMapping
-	public void cadastraDadosBancarios(String nomeBanco, String agencia, String conta, String chavePix,
-			Usuario usuario) {
-		DadosBancarios dadosBancarios = new DadosBancarios(nomeBanco, agencia, conta, chavePix, usuario);
-		dadosBancariosRepository.save(dadosBancarios);
+	@PostMapping("/cadastrar")
+	public DadosBancarios cadastrar(@RequestBody DadosBancarios dadosBancarios) {
+		return dadosBancariosRepository.save(dadosBancarios);
 	}
 
-	@RequestMapping("/visualiza")
-	@PostMapping
-	public DadosBancariosDto visualizaDadosBancarios(Long id) {
-		Optional<DadosBancarios> dadosBancarios = dadosBancariosRepository.findById(id);
-		return DadosBancariosDto.converter(dadosBancarios);
+	@GetMapping("/visualizar/{id}")
+	@Transactional
+	public DadosBancariosDto visualizar(@PathVariable Long id) {
+		DadosBancarios dadosBancarios = dadosBancariosRepository.getOne(id);
+		return new DadosBancariosDto(dadosBancarios);
 	}
 
-	@RequestMapping("/altera")
-	@PostMapping
-	public void alteraDadosBancarios(Long id, String nomeBanco, String agencia, String conta, String chavePix,
-			Usuario usuario) {
-		DadosBancarios dadosBancarios = new DadosBancarios(id, nomeBanco, agencia, conta, chavePix, usuario);
-		dadosBancariosRepository.save(dadosBancarios);
+	@PutMapping("/alterar/{id}")
+	@Transactional
+	public ResponseEntity<DadosBancariosDto> alterar(@PathVariable Long id,
+			@RequestBody @Valid AtualizacaoDadosBancariosForm form) {
+		DadosBancarios dadosBancarios = form.atualizar(id, dadosBancariosRepository);
+		return ResponseEntity.ok(new DadosBancariosDto(dadosBancarios));
 	}
 
-	@RequestMapping("/deleta")
-	@PostMapping
-	public void deletaDadosBancarios(Long id) {
+	@DeleteMapping("/deletar/{id}")
+	@Transactional
+	public ResponseEntity<?> deletar(@PathVariable Long id) {
 		dadosBancariosRepository.deleteById(id);
-
-	}
-
-	@GetMapping("/lista")
-	public void listaDadosBancarios() {
-
+		return ResponseEntity.ok().build();
 	}
 
 }

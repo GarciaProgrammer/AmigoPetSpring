@@ -49,7 +49,6 @@ public class AnimalController {
 
 		Animal animal = criaHashImagem(idAnimal, imagem);
 
-		// Salva imagem do animal no servidor
 		dataServer.criaDiretorio(imagem, animal);
 
 		animalRepository.save(animal);
