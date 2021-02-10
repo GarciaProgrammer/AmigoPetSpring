@@ -21,7 +21,6 @@ public class DataAnimal {
 		Path path = Paths.get(pasta + animal.getImagem());
 
 		Files.write(path, bytes);
-
 	}
 
 }
