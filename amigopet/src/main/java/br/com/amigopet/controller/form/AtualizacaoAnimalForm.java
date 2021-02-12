@@ -8,12 +8,12 @@ public class AtualizacaoAnimalForm {
 	private String nome;
 	private String tipo;
 	private String raca;
-	private int idade;
+	private String idade;
 	private String sexo;
 	private String descricao;
 	private Byte imagem;
-	private String cidade;
-	private String estado;
+	private int cidade;
+	private int estado;
 	private String status;
 
 	public String getNome() {
@@ -40,11 +40,11 @@ public class AtualizacaoAnimalForm {
 		this.raca = raca;
 	}
 
-	public int getIdade() {
+	public String getIdade() {
 		return idade;
 	}
 
-	public void setIdade(int idade) {
+	public void setIdade(String idade) {
 		this.idade = idade;
 	}
 
@@ -72,19 +72,19 @@ public class AtualizacaoAnimalForm {
 		this.imagem = imagem;
 	}
 
-	public String getCidade() {
+	public int getCidade() {
 		return cidade;
 	}
 
-	public void setCidade(String cidade) {
+	public void setCidade(int cidade) {
 		this.cidade = cidade;
 	}
 
-	public String getEstado() {
+	public int getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(int estado) {
 		this.estado = estado;
 	}
 
