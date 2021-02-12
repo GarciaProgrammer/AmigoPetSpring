@@ -70,7 +70,8 @@ public class Animal implements Serializable {
 		this.porte = porte;
 	}
 
-	
+
+
 
 	public Long getId() {
 		return id;
