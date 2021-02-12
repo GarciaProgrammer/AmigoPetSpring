@@ -54,12 +54,12 @@ public class AnimalController {
 //		animalRepository.save(animal);
 //
 //	}
-
+	
 	@PostMapping("/cadastrar")
 	public Animal cadastrar(@Valid @RequestParam("foto") MultipartFile foto, @RequestParam("nome") String nome,
-			@RequestParam("tipo") String tipo, @RequestParam("raca") String raca, @RequestParam("idade") int idade,
+			@RequestParam("tipo") String tipo, @RequestParam("raca") String raca, @RequestParam("idade") String idade,
 			@RequestParam("sexo") String sexo, @RequestParam("descricao") String descricao,
-			@RequestParam("cidade") String cidade, @RequestParam("estado") String estado,
+			@RequestParam("cidade") int cidade, @RequestParam("estado") int estado,
 			@RequestParam("status") String status, @RequestParam("porte") String porte,
 			@RequestParam("usuario") Usuario usuario) throws Exception {
 
@@ -72,6 +72,8 @@ public class AnimalController {
 
 		return animalRepository.save(animal);
 	}
+
+
 
 	@GetMapping("/visualizar/{id}")
 	@Transactional
@@ -101,6 +103,17 @@ public class AnimalController {
 		return AnimalDto.converterLista(animais);
 	}
 
+//	private Animal criaHashImagem(@Valid Long idAnimal, MultipartFile imagem) throws Exception {
+//		Animal animal = animalRepository.findById(idAnimal).orElseThrow(() -> new Exception("Animal não encontrado"));
+//		String nome = imagem.getOriginalFilename().substring(0, imagem.getOriginalFilename().length() - 4);
+//		String ext = imagem.getOriginalFilename().substring(imagem.getOriginalFilename().length() - 4,
+//				imagem.getOriginalFilename().length());
+//		String imgHashSave = nome + '_' + System.currentTimeMillis() + ext;
+//
+//		animal.setImagem(imgHashSave);
+//		return animal;
+//	}
+	
 	private String criaHashImagem(MultipartFile imagem) throws Exception {
 		String nome = imagem.getOriginalFilename().substring(0, imagem.getOriginalFilename().length() - 4);
 		String ext = imagem.getOriginalFilename().substring(imagem.getOriginalFilename().length() - 4,
@@ -108,5 +121,7 @@ public class AnimalController {
 		String imgHashSave = nome + '_' + System.currentTimeMillis() + ext;
 		return imgHashSave;
 	}
+	
+
 
 }
