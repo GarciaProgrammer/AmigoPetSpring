@@ -11,7 +11,7 @@ public class AtualizacaoAnimalForm {
 	private String idade;
 	private String sexo;
 	private String descricao;
-	private Byte imagem;
+	private String imagem;
 	private int cidade;
 	private int estado;
 	private String status;

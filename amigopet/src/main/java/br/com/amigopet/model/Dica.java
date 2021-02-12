@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Dica implements Serializable {
@@ -16,6 +17,8 @@ public class Dica implements Serializable {
 	private String titulo;
 	private String descricao;
 	private String imagem;
+	@ManyToOne
+	private Usuario usuario;
 
 	public Dica() {
 	}

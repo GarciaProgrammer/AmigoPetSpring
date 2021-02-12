@@ -50,7 +50,6 @@ public class DicaController {
 
 		Dica dica = criaHashImagem(idDica, imagem);
 
-		// Salva imagem do animal no servidor
 		dataServer.criaDiretorio(imagem, dica);
 
 		dicaRepository.save(dica);

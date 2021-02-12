@@ -33,8 +33,9 @@ public class Animal implements Serializable {
 		super();
 	}
 
-	public Animal(String nome, String tipo, String raca, String idade, String sexo, String descricao, Byte imagem,
-			Usuario usuario, int cidade, int estado, String status) {
+
+	public Animal(String nome, String tipo, String raca, String idade, String sexo, String descricao, String imagem,
+			Usuario usuario, int cidade, int estado, String status, String porte) {
 
 		super();
 		this.nome = nome;
@@ -51,8 +52,8 @@ public class Animal implements Serializable {
 		this.porte = porte;
 	}
 
-	public Animal(Long id, String nome, String tipo, String raca, String idade, String sexo, String descricao, Byte imagem,
-			Usuario usuario, int cidade, int estado, String status) {
+	public Animal(Long id, String nome, String tipo, String raca, String idade, String sexo, String descricao, String imagem,
+			Usuario usuario, int cidade, int estado, String status, String porte) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -69,6 +70,7 @@ public class Animal implements Serializable {
 		this.porte = porte;
 	}
 
+	
 
 	public Long getId() {
 		return id;
