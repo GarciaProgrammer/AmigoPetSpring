@@ -9,8 +9,6 @@ public class AtualizacaoUsuarioForm {
 	private String email;
 	private String senha;
 	private String celular;
-	private String cidade;
-	private String estado;
 
 	public String getNome() {
 		return nome;
@@ -44,30 +42,12 @@ public class AtualizacaoUsuarioForm {
 		this.celular = celular;
 	}
 
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
 	public Usuario atualizar(Long id, UsuarioRepository usuarioRepository) {
 		Usuario usuario = usuarioRepository.getOne(id);
 		usuario.setNome(this.nome);
 		usuario.setEmail(this.email);
 		usuario.setSenha(this.senha);
 		usuario.setCelular(this.celular);
-		usuario.setCidade(this.cidade);
-		usuario.setEstado(this.estado);
 
 		return usuario;
 	}

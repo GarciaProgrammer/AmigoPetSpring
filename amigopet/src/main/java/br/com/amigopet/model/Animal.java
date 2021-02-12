@@ -21,12 +21,13 @@ public class Animal implements Serializable {
 	private String idade;
 	private String sexo;
 	private String descricao;
-	private Byte imagem;
+	private String imagem;
 	@ManyToOne
 	private Usuario usuario;
 	private int cidade;
 	private int estado;
 	private String status;
+	private String porte;
 
 	public Animal() {
 		super();
@@ -34,6 +35,7 @@ public class Animal implements Serializable {
 
 	public Animal(String nome, String tipo, String raca, String idade, String sexo, String descricao, Byte imagem,
 			Usuario usuario, int cidade, int estado, String status) {
+
 		super();
 		this.nome = nome;
 		this.tipo = tipo;
@@ -46,6 +48,7 @@ public class Animal implements Serializable {
 		this.cidade = cidade;
 		this.estado = estado;
 		this.status = status;
+		this.porte = porte;
 	}
 
 	public Animal(Long id, String nome, String tipo, String raca, String idade, String sexo, String descricao, Byte imagem,
@@ -63,7 +66,9 @@ public class Animal implements Serializable {
 		this.cidade = cidade;
 		this.estado = estado;
 		this.status = status;
+		this.porte = porte;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -121,11 +126,11 @@ public class Animal implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Byte getImagem() {
+	public String getImagem() {
 		return imagem;
 	}
 
-	public void setImagem(Byte imagem) {
+	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
 
@@ -159,6 +164,14 @@ public class Animal implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getPorte() {
+		return porte;
+	}
+
+	public void setPorte(String porte) {
+		this.porte = porte;
 	}
 
 }

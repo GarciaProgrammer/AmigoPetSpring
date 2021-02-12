@@ -1,21 +1,22 @@
 package br.com.amigopet.controller.form;
 
 import br.com.amigopet.model.Animal;
-import br.com.amigopet.repository.AnimalRepository;
+import br.com.amigopet.model.Usuario;
 
-public class AtualizacaoAnimalForm {
+public class AnimalForm {
 
 	private String nome;
 	private String tipo;
 	private String raca;
-	private String idade;
+	private int idade;
 	private String sexo;
 	private String descricao;
-	private Byte imagem;
-	private int cidade;
-	private int estado;
+	private String imagem;
+	private String cidade;
+	private String estado;
 	private String status;
 	private String porte;
+	private Usuario usuario;
 
 	public String getNome() {
 		return nome;
@@ -41,11 +42,11 @@ public class AtualizacaoAnimalForm {
 		this.raca = raca;
 	}
 
-	public String getIdade() {
+	public int getIdade() {
 		return idade;
 	}
 
-	public void setIdade(String idade) {
+	public void setIdade(int idade) {
 		this.idade = idade;
 	}
 
@@ -73,20 +74,28 @@ public class AtualizacaoAnimalForm {
 		this.imagem = imagem;
 	}
 
-	public int getCidade() {
+	public String getCidade() {
 		return cidade;
 	}
 
-	public void setCidade(int cidade) {
+	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
 
-	public int getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(int estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getStatus() {
@@ -105,21 +114,8 @@ public class AtualizacaoAnimalForm {
 		this.porte = porte;
 	}
 
-	public Animal atualizar(Long id, AnimalRepository animalRepository) {
-		Animal animal = animalRepository.getOne(id);
-		animal.setNome(this.nome);
-		animal.setTipo(this.tipo);
-		animal.setRaca(this.raca);
-		animal.setIdade(this.idade);
-		animal.setSexo(this.sexo);
-		animal.setDescricao(this.descricao);
-		animal.setImagem(this.imagem);
-		animal.setCidade(this.cidade);
-		animal.setEstado(this.estado);
-		animal.setStatus(this.status);
-		animal.setPorte(this.porte);
-
-		return animal;
+	public Animal converter() {
+		return new Animal(nome, tipo, raca, idade, sexo, descricao, imagem, usuario, cidade, estado, status, porte);
 	}
 
 }

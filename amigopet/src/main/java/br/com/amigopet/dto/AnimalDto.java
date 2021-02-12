@@ -14,11 +14,12 @@ public class AnimalDto {
 	private String idade;
 	private String sexo;
 	private String descricao;
-	private Byte imagem;
+	private String imagem;
 	private Long usuario;
 	private int cidade;
 	private int estado;
 	private String status;
+	private String porte;
 
 	public AnimalDto(Animal animal) {
 		this.id = animal.getId();
@@ -33,6 +34,7 @@ public class AnimalDto {
 		this.cidade = animal.getCidade();
 		this.estado = animal.getEstado();
 		this.status = animal.getStatus();
+		this.porte = animal.getPorte();
 
 	}
 
@@ -64,7 +66,7 @@ public class AnimalDto {
 		return descricao;
 	}
 
-	public Byte getImagem() {
+	public String getImagem() {
 		return imagem;
 	}
 
@@ -82,6 +84,10 @@ public class AnimalDto {
 
 	public String getStatus() {
 		return status;
+	}
+
+	public String getPorte() {
+		return porte;
 	}
 
 	public static List<AnimalDto> converterLista(List<Animal> animais) {
