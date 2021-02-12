@@ -11,13 +11,13 @@ public class AnimalDto {
 	private String nome;
 	private String tipo;
 	private String raca;
-	private int idade;
+	private String idade;
 	private String sexo;
 	private String descricao;
 	private String imagem;
 	private Long usuario;
-	private String cidade;
-	private String estado;
+	private int cidade;
+	private int estado;
 	private String status;
 	private String porte;
 
@@ -54,7 +54,7 @@ public class AnimalDto {
 		return raca;
 	}
 
-	public int getIdade() {
+	public String getIdade() {
 		return idade;
 	}
 
@@ -74,11 +74,11 @@ public class AnimalDto {
 		return usuario;
 	}
 
-	public String getCidade() {
+	public int getCidade() {
 		return cidade;
 	}
 
-	public String getEstado() {
+	public int getEstado() {
 		return estado;
 	}
 

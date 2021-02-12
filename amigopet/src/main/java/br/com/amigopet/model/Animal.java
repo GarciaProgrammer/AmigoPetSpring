@@ -18,14 +18,14 @@ public class Animal implements Serializable {
 	private String nome;
 	private String tipo;
 	private String raca;
-	private int idade;
+	private String idade;
 	private String sexo;
 	private String descricao;
 	private String imagem;
 	@ManyToOne
 	private Usuario usuario;
-	private String cidade;
-	private String estado;
+	private int cidade;
+	private int estado;
 	private String status;
 	private String porte;
 
@@ -33,8 +33,9 @@ public class Animal implements Serializable {
 		super();
 	}
 
-	public Animal(String nome, String tipo, String raca, int idade, String sexo, String descricao, String imagem,
-			Usuario usuario, String cidade, String estado, String status, String porte) {
+	public Animal(String nome, String tipo, String raca, String idade, String sexo, String descricao, Byte imagem,
+			Usuario usuario, int cidade, int estado, String status) {
+
 		super();
 		this.nome = nome;
 		this.tipo = tipo;
@@ -50,8 +51,8 @@ public class Animal implements Serializable {
 		this.porte = porte;
 	}
 
-	public Animal(Long id, String nome, String tipo, String raca, int idade, String sexo, String descricao,
-			String imagem, Usuario usuario, String cidade, String estado, String status, String porte) {
+	public Animal(Long id, String nome, String tipo, String raca, String idade, String sexo, String descricao, Byte imagem,
+			Usuario usuario, int cidade, int estado, String status) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -101,11 +102,11 @@ public class Animal implements Serializable {
 		this.raca = raca;
 	}
 
-	public int getIdade() {
+	public String getIdade() {
 		return idade;
 	}
 
-	public void setIdade(int idade) {
+	public void setIdade(String idade) {
 		this.idade = idade;
 	}
 
@@ -133,19 +134,19 @@ public class Animal implements Serializable {
 		this.imagem = imagem;
 	}
 
-	public String getCidade() {
+	public int getCidade() {
 		return cidade;
 	}
 
-	public void setCidade(String cidade) {
+	public void setCidade(int cidade) {
 		this.cidade = cidade;
 	}
 
-	public String getEstado() {
+	public int getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(int estado) {
 		this.estado = estado;
 	}
 
