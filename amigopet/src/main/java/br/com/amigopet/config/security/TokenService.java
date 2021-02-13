@@ -26,7 +26,10 @@ public class TokenService {
 		
 		return Jwts.builder()
 				.setIssuer("API AmigoPet")
-				.setSubject(logado.getId().toString())
+				.setSubject(logado.getId().toString()+
+						logado.getNome().toString()+
+						logado.getEmail().toString()+
+						logado.getCelular().toString())
 				.setIssuedAt(hoje)
 				.setExpiration(dataExpiracao)
 				.signWith(SignatureAlgorithm.HS256, secret)
