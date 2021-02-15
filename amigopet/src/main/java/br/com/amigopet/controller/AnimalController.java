@@ -37,11 +37,11 @@ public class AnimalController {
 	@Autowired
 	DataAnimal dataServer;
 
-//	@PostMapping("/cadastrar")
-//	public Animal cadastrar(@RequestBody Animal animal) {
-//		return animalRepository.save(animal);
-//
-//	}
+	@PostMapping("/cadastrar")
+	public Animal cadastrar(@RequestBody Animal animal) {
+		return animalRepository.save(animal);
+
+}
 //
 //	@PostMapping("/cadastrarfoto/{idAnimal}")
 //	public void cadastrar(@Valid @PathVariable("idAnimal") Long idAnimal,
@@ -55,7 +55,7 @@ public class AnimalController {
 //
 //	}
 	
-	@PostMapping("/cadastrar")
+	/*@PostMapping("/cadastrar")
 	public Animal cadastrar(@Valid @RequestParam("foto") MultipartFile foto, @RequestParam("nome") String nome,
 			@RequestParam("tipo") String tipo, @RequestParam("raca") String raca, @RequestParam("idade") String idade,
 			@RequestParam("sexo") String sexo, @RequestParam("descricao") String descricao,
@@ -71,10 +71,9 @@ public class AnimalController {
 		dataServer.criaDiretorio(foto, animal);
 
 		return animalRepository.save(animal);
-	}
-
-
-
+	}*/
+	
+	
 	@GetMapping("/visualizar/{id}")
 	@Transactional
 	public AnimalDto visualizar(@PathVariable Long id) {
