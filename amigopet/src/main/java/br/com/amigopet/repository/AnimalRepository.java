@@ -9,14 +9,15 @@ import br.com.amigopet.model.Usuario;
 
 public interface AnimalRepository extends JpaRepository<Animal, Long> {
 
+	public List<Animal> findAllByUsuario(Usuario usuario);
 
-	List<Animal> findAllByUsuario(Usuario usuario);
+	public List<Animal> findAllByStatus(String status);
 
-	List<Animal> findAllByStatus(String status);
+	public List<Animal> findAllByStatusAndUsuario(String status, Usuario usuario);
 
-	List<Animal> findAllByStatusAndUsuario(String status, Usuario usuario);
+	
 
-//	List<Animal> findAllByEstadoAndCidadeAndPorteAndEspecieAndSexoAndIdade(int estado, int cidade, String porte,
-//			String especie, String sexo, String idade);
+	public List<Animal> findAllByEstadoOrCidadeOrPorteOrTipoOrSexoOrIdade(int estado, int cidade, String porte,
+			String tipo, String sexo, String idade);
 
 }
