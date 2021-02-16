@@ -73,9 +73,14 @@ public class UsuarioController {
 	public ResponseEntity<TokenDto> alterar(@PathVariable Long id,
 			@RequestBody @Valid AtualizacaoUsuarioForm form) {
 		
-			form.atualizar(id, usuarioRepository);
+			 Usuario usuario = form.atualizar(id, usuarioRepository);
+			 if (usuario == null ) {
+				 return ResponseEntity.badRequest().build();
+			 }
+			 //form.setEmail(usuario.getEmail());
 		
 		UsernamePasswordAuthenticationToken dadosLogin = form.converter();
+		
 		try {
 			Authentication authentication = authManager.authenticate(dadosLogin);
 			String token = tokenService.gerarToken(authentication);

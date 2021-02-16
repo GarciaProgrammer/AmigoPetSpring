@@ -45,16 +45,34 @@ public class AtualizacaoUsuarioForm {
 	}
 
 	public Usuario atualizar(Long id, UsuarioRepository usuarioRepository) {
+		
 		Usuario usuario = usuarioRepository.getOne(id);
+		boolean existeEmail = usuarioRepository.existsByEmail(this.email);
+		System.out.println("veio do site: " + this.email);
+		System.out.println("ja do banco: " + usuario.getEmail());
 
-		usuario.setNome(this.nome);
-		usuario.setEmail(this.email);
-		usuario.setSenha(this.senha);
-		usuario.setCelular(this.celular);
-
-		usuarioRepository.save(usuario);
-
-		return usuario;
+		
+		if (existeEmail) {
+			if (this.email.equals(usuario.getEmail())) {
+				System.out.println("o email é o seu mesmo");
+				usuario.setNome(this.nome);
+				usuario.setSenha(this.senha);
+				usuario.setCelular(this.celular);
+				usuarioRepository.save(usuario);
+				return usuario;
+			} else {
+				return null;
+			}
+		} else {
+			System.out.println("email Não existe e será alterado");
+			usuario.setNome(this.nome);
+			usuario.setEmail(this.email);
+			usuario.setSenha(this.senha);
+			usuario.setCelular(this.celular);
+			
+			usuarioRepository.save(usuario);
+			 return usuario;
+		}
 
 	}
 
