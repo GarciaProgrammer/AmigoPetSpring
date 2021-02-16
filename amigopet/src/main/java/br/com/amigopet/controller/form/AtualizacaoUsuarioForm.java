@@ -1,5 +1,7 @@
 package br.com.amigopet.controller.form;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
 import br.com.amigopet.model.Usuario;
 import br.com.amigopet.repository.UsuarioRepository;
 
@@ -44,12 +46,20 @@ public class AtualizacaoUsuarioForm {
 
 	public Usuario atualizar(Long id, UsuarioRepository usuarioRepository) {
 		Usuario usuario = usuarioRepository.getOne(id);
+
 		usuario.setNome(this.nome);
 		usuario.setEmail(this.email);
 		usuario.setSenha(this.senha);
 		usuario.setCelular(this.celular);
 
+		usuarioRepository.save(usuario);
+
 		return usuario;
+
 	}
 
+	public UsernamePasswordAuthenticationToken converter() {
+		return new UsernamePasswordAuthenticationToken(email, senha);
+
+	}
 }

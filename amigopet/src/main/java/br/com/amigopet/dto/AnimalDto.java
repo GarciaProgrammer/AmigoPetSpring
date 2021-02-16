@@ -94,4 +94,6 @@ public class AnimalDto {
 		return animais.stream().map(AnimalDto::new).collect(Collectors.toList());
 	}
 
+	
+
 }
