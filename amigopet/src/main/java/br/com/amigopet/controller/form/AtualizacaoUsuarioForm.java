@@ -46,19 +46,20 @@ public class AtualizacaoUsuarioForm {
 
 	public Usuario atualizar(Long id, UsuarioRepository usuarioRepository) {
 		Usuario usuario = usuarioRepository.getOne(id);
-	
-			usuario.setNome(this.nome);
-			usuario.setEmail(this.email);
-			usuario.setSenha(this.senha);
-			usuario.setCelular(this.celular);
-		
+
+		usuario.setNome(this.nome);
+		usuario.setEmail(this.email);
+		usuario.setSenha(this.senha);
+		usuario.setCelular(this.celular);
+
+		usuarioRepository.save(usuario);
+
 		return usuario;
 
 	}
-	
+
 	public UsernamePasswordAuthenticationToken converter() {
 		return new UsernamePasswordAuthenticationToken(email, senha);
-	}
-	
 
+	}
 }

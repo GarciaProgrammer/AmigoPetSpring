@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.amigopet.config.security.TokenService;
 import br.com.amigopet.controller.form.AtualizacaoUsuarioForm;
 import br.com.amigopet.dto.TokenDto;
-
 import br.com.amigopet.dto.UsuarioDto;
 
 import br.com.amigopet.model.Usuario;
@@ -74,8 +73,7 @@ public class UsuarioController {
 	public ResponseEntity<TokenDto> alterar(@PathVariable Long id,
 			@RequestBody @Valid AtualizacaoUsuarioForm form) {
 		
-		form.atualizar(id, usuarioRepository);
-		
+			form.atualizar(id, usuarioRepository);
 		
 		UsernamePasswordAuthenticationToken dadosLogin = form.converter();
 		try {
@@ -86,8 +84,7 @@ public class UsuarioController {
 			return ResponseEntity.badRequest().build();
 		}
 		
-		
-	
 	}
+	
 
 }

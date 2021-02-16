@@ -27,6 +27,7 @@ public class TokenService {
 		return Jwts.builder()
 				.setIssuer("API AmigoPet")
 				.setSubject(logado.getId().toString())
+				.claim("id", logado.getId())
 				.claim("nome", logado.getNome())
 				.claim("email", logado.getEmail())
 				.claim("celular", logado.getCelular())

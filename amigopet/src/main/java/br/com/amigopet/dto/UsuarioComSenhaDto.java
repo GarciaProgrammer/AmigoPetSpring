@@ -1,5 +1,7 @@
 package br.com.amigopet.dto;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
 import br.com.amigopet.model.Usuario;
 
 public class UsuarioComSenhaDto {
@@ -36,6 +38,10 @@ public class UsuarioComSenhaDto {
 
 	public String getSenha() {
 		return senha;
+	}
+
+	public UsernamePasswordAuthenticationToken converter() {
+		return new UsernamePasswordAuthenticationToken(email, senha);
 	}
 
 }
