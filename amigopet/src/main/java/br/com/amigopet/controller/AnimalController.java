@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.com.amigopet.controller.form.AtualizacaoAnimalForm;
 import br.com.amigopet.dto.AnimalDto;
+import br.com.amigopet.dto.FiltrosAnimal;
 import br.com.amigopet.files.upload.service.FilesStorageService;
 import br.com.amigopet.model.Animal;
 import br.com.amigopet.model.Usuario;
@@ -105,7 +104,7 @@ public class AnimalController {
 		return AnimalDto.converterLista(animais);
 	}
 
-	@GetMapping("/files/{filename:.+}")
+	@GetMapping("/buscaimagem/{nomeimagem:.+}")
 	@ResponseBody
 	public ResponseEntity<Resource> getFile(@PathVariable String filename) {
 		Resource file = storageService.load(filename);
@@ -128,19 +127,16 @@ public class AnimalController {
 			return AnimalDto.converterLista(animais);
 		}
 	}
-	
-	
-//	@GetMapping("/listarcomfiltro/{estado}/{cidade}/{porte}/{especie}/{sexo}/{idade}")
-//	public List<AnimalDto> listaPorUsuario(@PathVariable int estado,
-//			@PathVariable int cidade,@PathVariable String porte,@PathVariable String especie,
-//			@PathVariable String sexo,@PathVariable String idade) {
-//		
-//		List<Animal> animais = animalRepository.findAllByEstadoAndCidadeAndPorteAndEspecieAndSexoAndIdade(estado,cidade,porte,especie,sexo,idade);
-//		return AnimalDto.converterLista(animais);
-//		
-//	}
-	
-	
+
+	@GetMapping("/listarcomfiltro")
+	public List<AnimalDto> listaPorUsuario(@RequestBody FiltrosAnimal filtrosAnimal) {
+
+		List<Animal> animais = filtrosAnimal.filtra(animalRepository , filtrosAnimal);
+		
+		
+		return AnimalDto.converterLista(animais);
+
+	}
 
 	private Animal criaHashImagem(@Valid Long idAnimal, MultipartFile imagem) throws Exception {
 		Animal animal = animalRepository.findById(idAnimal).orElseThrow(() -> new Exception("Animal não encontrado"));

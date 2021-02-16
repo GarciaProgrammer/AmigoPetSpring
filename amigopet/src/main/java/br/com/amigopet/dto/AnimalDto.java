@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.amigopet.model.Animal;
-import br.com.amigopet.model.Usuario;
 
 public class AnimalDto {
 
