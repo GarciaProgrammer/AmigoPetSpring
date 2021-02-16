@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,10 +40,10 @@ public class AnimalController {
 
 	@Autowired
 	AnimalRepository animalRepository;
-	
+
 	@Autowired
 	UsuarioRepository usuarioRepository;
-	
+
 	@Autowired
 	FilesStorageService storageService;
 
@@ -71,7 +72,7 @@ public class AnimalController {
 	@Transactional
 	public AnimalDto visualizar(@PathVariable Long id) {
 		Animal animal = animalRepository.getOne(id);
-		
+
 		return new AnimalDto(animal);
 	}
 
@@ -95,15 +96,15 @@ public class AnimalController {
 		List<Animal> animais = animalRepository.findAll();
 		return AnimalDto.converterLista(animais);
 	}
-	
+
 	@GetMapping("/listarporusuario/{id}")
 	public List<AnimalDto> listaPorUsuario(@PathVariable Long id) {
 		Usuario usuario = usuarioRepository.getOne(id);
-		
+
 		List<Animal> animais = animalRepository.findAllByUsuario(usuario);
 		return AnimalDto.converterLista(animais);
 	}
-	
+
 	@GetMapping("/files/{filename:.+}")
 	@ResponseBody
 	public ResponseEntity<Resource> getFile(@PathVariable String filename) {
@@ -113,6 +114,33 @@ public class AnimalController {
 				.body(file);
 	}
 
+	@GetMapping("/listarporStatus/{id}/{status}")
+	public List<AnimalDto> listaPorUsuario(@PathVariable Long id, @PathVariable String status) {
+		Usuario usuario = usuarioRepository.getOne(id);
+
+		if (status.equals("ambos")) {
+			List<Animal> animais = animalRepository.findAllByUsuario(usuario);
+			return AnimalDto.converterLista(animais);
+
+		} else {
+
+			List<Animal> animais = animalRepository.findAllByStatusAndUsuario(status, usuario);
+			return AnimalDto.converterLista(animais);
+		}
+	}
+	
+	
+//	@GetMapping("/listarcomfiltro/{estado}/{cidade}/{porte}/{especie}/{sexo}/{idade}")
+//	public List<AnimalDto> listaPorUsuario(@PathVariable int estado,
+//			@PathVariable int cidade,@PathVariable String porte,@PathVariable String especie,
+//			@PathVariable String sexo,@PathVariable String idade) {
+//		
+//		List<Animal> animais = animalRepository.findAllByEstadoAndCidadeAndPorteAndEspecieAndSexoAndIdade(estado,cidade,porte,especie,sexo,idade);
+//		return AnimalDto.converterLista(animais);
+//		
+//	}
+	
+	
 
 	private Animal criaHashImagem(@Valid Long idAnimal, MultipartFile imagem) throws Exception {
 		Animal animal = animalRepository.findById(idAnimal).orElseThrow(() -> new Exception("Animal não encontrado"));

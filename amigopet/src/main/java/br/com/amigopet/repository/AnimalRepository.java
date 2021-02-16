@@ -12,4 +12,11 @@ public interface AnimalRepository extends JpaRepository<Animal, Long> {
 
 	List<Animal> findAllByUsuario(Usuario usuario);
 
+	List<Animal> findAllByStatus(String status);
+
+	List<Animal> findAllByStatusAndUsuario(String status, Usuario usuario);
+
+//	List<Animal> findAllByEstadoAndCidadeAndPorteAndEspecieAndSexoAndIdade(int estado, int cidade, String porte,
+//			String especie, String sexo, String idade);
+
 }

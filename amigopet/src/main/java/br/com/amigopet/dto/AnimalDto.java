@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.amigopet.model.Animal;
+import br.com.amigopet.model.Usuario;
 
 public class AnimalDto {
 
@@ -15,7 +16,8 @@ public class AnimalDto {
 	private String sexo;
 	private String descricao;
 	private String imagem;
-	private Long usuario;
+	private String nomeUsuario;
+	private String celularUsuario;
 	private int cidade;
 	private int estado;
 	private String status;
@@ -30,7 +32,8 @@ public class AnimalDto {
 		this.sexo = animal.getSexo();
 		this.descricao = animal.getDescricao();
 		this.imagem = animal.getImagem();
-		this.usuario = animal.getUsuario().getId();
+		this.nomeUsuario = animal.getUsuario().getNome();
+		this.celularUsuario = animal.getUsuario().getCelular();
 		this.cidade = animal.getCidade();
 		this.estado = animal.getEstado();
 		this.status = animal.getStatus();
@@ -70,8 +73,12 @@ public class AnimalDto {
 		return imagem;
 	}
 
-	public Long getUsuario() {
-		return usuario;
+	public String getNomeUsuario() {
+		return nomeUsuario;
+	}
+
+	public String getCelularUsuario() {
+		return celularUsuario;
 	}
 
 	public int getCidade() {
@@ -93,7 +100,5 @@ public class AnimalDto {
 	public static List<AnimalDto> converterLista(List<Animal> animais) {
 		return animais.stream().map(AnimalDto::new).collect(Collectors.toList());
 	}
-
-	
 
 }
