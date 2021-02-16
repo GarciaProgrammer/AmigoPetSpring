@@ -1,5 +1,8 @@
 package br.com.amigopet.dto;
 
+import java.util.List;
+
+import br.com.amigopet.model.Animal;
 import br.com.amigopet.model.Usuario;
 
 public class UsuarioDto {
@@ -8,6 +11,7 @@ public class UsuarioDto {
 	private String nome;
 	private String email;
 	private String celular;
+	private List<Animal> animais;
 
 	public UsuarioDto(Usuario usuario) {
 		this.id = usuario.getId();
@@ -32,5 +36,10 @@ public class UsuarioDto {
 	public String getCelular() {
 		return celular;
 	}
+
+	public List<Animal> getAnimais() {
+		return animais;
+	}
+	
 
 }

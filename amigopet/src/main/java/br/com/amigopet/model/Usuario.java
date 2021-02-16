@@ -9,7 +9,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,7 +28,13 @@ public class Usuario implements UserDetails {
 	private String senha;
 	private String celular;
 	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "usuario_perfil",
+		joinColumns = @JoinColumn(name="usuario_id"),
+		inverseJoinColumns = @JoinColumn(name="perfil_id")
+			)
 	private List<Perfil> perfis = new ArrayList<>();
+	@OneToMany(mappedBy = "usuario")
+	private List<Animal> animais;
 
 	public Usuario() {
 		super();

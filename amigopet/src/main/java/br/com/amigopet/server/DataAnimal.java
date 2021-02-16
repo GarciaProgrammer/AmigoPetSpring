@@ -1,5 +1,6 @@
 package br.com.amigopet.server;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,13 +15,22 @@ import br.com.amigopet.model.Animal;
 public class DataAnimal {
 
 	public void criaDiretorio(MultipartFile imagem, Animal animal) throws IOException {
-		String pasta = "imagens\\imagensAnimais\\";
+		String pasta = "uploads//animais//";
 
-		byte[] bytes = imagem.getBytes();
+		boolean success = (new File(pasta)).mkdirs();
+		if (!success) {
+			byte[] bytes = imagem.getBytes();
 
-		Path path = Paths.get(pasta + animal.getImagem());
+			Path path = Paths.get(pasta + animal.getImagem());
 
-		Files.write(path, bytes);
+			Files.write(path, bytes);
+		} else {
+			byte[] bytes = imagem.getBytes();
+
+			Path path = Paths.get(pasta + animal.getImagem());
+
+			Files.write(path, bytes);
+		}
+
 	}
-
 }
