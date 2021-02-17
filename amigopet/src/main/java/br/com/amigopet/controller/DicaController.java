@@ -115,7 +115,7 @@ public class DicaController {
 	}
 
 
-	@GetMapping("/files/{filename:.+}")
+	@GetMapping("/buscaimagem/{filename:.+}")
 	@ResponseBody
 	public ResponseEntity<Resource> getFile(@PathVariable String filename) {
 		Resource file = storageService.load(filename);
