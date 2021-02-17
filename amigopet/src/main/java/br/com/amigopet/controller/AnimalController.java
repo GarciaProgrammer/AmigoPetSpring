@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import br.com.amigopet.controller.form.AtualizacaoAnimalForm;
 import br.com.amigopet.dto.AnimalDto;
 import br.com.amigopet.dto.FiltrosAnimal;
+import br.com.amigopet.files.upload.message.ResponseMessage;
 import br.com.amigopet.files.upload.service.FilesStorageService;
 import br.com.amigopet.model.Animal;
 import br.com.amigopet.model.Usuario;
@@ -56,16 +58,26 @@ public class AnimalController {
 	}
 
 	@PostMapping("/cadastrarfoto/{idAnimal}")
-	public void cadastrar(@Valid @PathVariable("idAnimal") Long idAnimal,
+	public ResponseEntity<ResponseMessage> cadastrar(@Valid @PathVariable("idAnimal") Long idAnimal,
 			@RequestPart(name = "imagem") MultipartFile imagem) throws Exception {
-
+		String message = "";
+		try {
 		Animal animal = criaHashImagem(idAnimal, imagem);
 
 		dataServer.criaDiretorio(imagem, animal);
 
 		animalRepository.save(animal);
 
+		message = "Uploaded the file successfully: " + imagem.getOriginalFilename();
+		return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+	} catch (Exception e) {
+		message = "Could not upload the file: " + imagem.getOriginalFilename() + "!";
+		return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
 	}
+	}
+	
+
+
 
 	@GetMapping("/visualizar/{id}")
 	@Transactional
@@ -104,7 +116,7 @@ public class AnimalController {
 		return AnimalDto.converterLista(animais);
 	}
 
-	@GetMapping("/buscaimagem/{nomeimagem:.+}")
+	@GetMapping("/buscaimagem/{filename:.+}")
 	@ResponseBody
 	public ResponseEntity<Resource> getFile(@PathVariable String filename) {
 		Resource file = storageService.load(filename);
