@@ -15,7 +15,7 @@ import br.com.amigopet.model.Dica;
 public class DataDica {
 
 	public void criaDiretorio(MultipartFile imagem, Dica dica) throws IOException {
-		String pasta = "uploads//dicas//";
+		String pasta = "uploads/";
 		
 		
 		boolean success = (new File(pasta)).mkdirs();

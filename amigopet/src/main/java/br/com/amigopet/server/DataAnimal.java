@@ -15,7 +15,7 @@ import br.com.amigopet.model.Animal;
 public class DataAnimal {
 
 	public void criaDiretorio(MultipartFile imagem, Animal animal) throws IOException {
-		String pasta = "uploads//animais//";
+		String pasta = "uploads/";
 
 		boolean success = (new File(pasta)).mkdirs();
 		if (!success) {
