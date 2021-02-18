@@ -140,8 +140,8 @@ public class AnimalController {
 		}
 	}
 
-	@GetMapping("/listarcomfiltro")
-	public List<AnimalDto> listaPorUsuario(@RequestBody FiltrosAnimal filtrosAnimal) {
+	@PostMapping("/listarcomfiltro")
+	public List<AnimalDto> listaPorUsuario(@Valid @RequestBody FiltrosAnimal filtrosAnimal) {
 
 		List<Animal> animais = filtrosAnimal.filtra(animalRepository , filtrosAnimal);
 		
