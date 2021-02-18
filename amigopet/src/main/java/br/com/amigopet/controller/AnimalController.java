@@ -104,7 +104,7 @@ public class AnimalController {
 
 	@GetMapping("/lista")
 	public List<AnimalDto> lista() {
-		List<Animal> animais = animalRepository.findAll();
+		List<Animal> animais = animalRepository.findAllByStatus("A");
 		return AnimalDto.converterLista(animais);
 	}
 

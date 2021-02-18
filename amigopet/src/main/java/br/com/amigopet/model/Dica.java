@@ -29,11 +29,12 @@ public class Dica implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Dica(Long id, String titulo, String descricao, String imagem) {
+	public Dica(Long id, String titulo, String descricao, String imagem, Usuario usuario) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
 		this.descricao = descricao;
+		this.usuario = usuario;
 		this.imagem = imagem;
 
 	}
@@ -69,5 +70,15 @@ public class Dica implements Serializable {
 	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+	
 
 }
